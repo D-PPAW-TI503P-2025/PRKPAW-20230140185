@@ -1,4 +1,4 @@
-## Tugas 2
+# Tugas 2
 
 Tampilan endpoin get book:
 ![Tampilan endpoin get](./Tugas/ss/endpoin_get.png)
