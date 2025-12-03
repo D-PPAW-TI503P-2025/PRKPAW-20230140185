@@ -1,6 +1,5 @@
-
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = 'MAGE_BLADEDANCER';
 
 exports.authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
@@ -23,10 +22,13 @@ exports.authenticateToken = (req, res, next) => {
   });
 };
 
+// Middleware 'isAdmin' sekarang akan memeriksa 'role' dari token
 exports.isAdmin = (req, res, next) => {
   if (req.user && req.user.role === "admin") {
     next();
   } else {
-    res.status(403).json({ message: "Akses ditolak. Hanya untuk admin." });
+    return res
+      .status(403)
+      .json({ message: "Akses ditolak. Hanya untuk admin." });
   }
 };

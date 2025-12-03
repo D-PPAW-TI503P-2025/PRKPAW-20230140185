@@ -1,14 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
+const reportController = require('../controllers/reportController');
+const { authenticateToken, isAdmin } = require('../middleware/permissionMiddleware');
 
-const permissionMiddleware = require("../middleware/permissionMiddleware");
-const reportController = require("../controllers/reportController");
-
-router.get(
-  "/daily",
-  permissionMiddleware.authenticateToken, 
-  permissionMiddleware.isAdmin,          
-  reportController.getDailyReport       
-);
+// Hanya admin yang sudah login yang bisa akses
+router.get('/daily', [authenticateToken, isAdmin], reportController.getDailyReport);
 
 module.exports = router;
